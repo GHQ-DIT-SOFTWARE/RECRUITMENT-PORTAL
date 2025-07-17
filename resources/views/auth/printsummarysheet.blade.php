@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="{{ config('app.name') }}" name="description" />
     <meta content="{{ config('app.name') }}" name="author" />
-    <link rel="icon" href="{{ asset('new-logo.png') }}" type="image/x-icon">
+    <link rel="icon" href="{{ asset('logo-icon.png') }}" type="image/x-icon">
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
 </head>
 <div class="auth-wrapper align-items-stretch aut-bg-img">
@@ -35,8 +35,8 @@
                         </div>
                     @endif
                     <h6 class="mb-4 f-w-400 text-center">REPRINT-SUMMARY-SHEET</h6>
-                    <div class="form-group mb-3">
-                        <label class="floating-label" for="serial_number">Voucher Code</label>
+                       <div class="form-group mb-3">
+                        <label class="floating-label" for="serial_number">Serial Number</label>
                         <input type="text" class="form-control @error('serial_number') is-invalid @enderror"
                             id="serial" name="serial_number" placeholder="">
                         @error('serial_number')
@@ -45,6 +45,17 @@
                             </span>
                         @enderror
                     </div>
+                    <div class="form-group mb-3">
+                        <label class="floating-label" for="pincode">Pincode</label>
+                        <input type="text" class="form-control @error('pincode') is-invalid @enderror"
+                            id="serial" name="pincode" placeholder="">
+                        @error('pincode')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+
                     <div class="form-group mb-4">
                         <label class="floating-label" for="contact">Contact</label>
                         <input type="contact" class="form-control @error('contact') is-invalid @enderror" name="contact"

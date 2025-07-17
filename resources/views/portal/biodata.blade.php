@@ -37,7 +37,7 @@
     <link rel="stylesheet" href="{{ asset('frontend/assets/css/style.css') }}">
     <link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet" />
     {{-- 18570a --}}
- 
+
 
         <section class="pcoded-apply-container">
             <div class="pcoded-content">
@@ -552,9 +552,7 @@ document.addEventListener('DOMContentLoaded', function () {
             nhisInput.disabled = true;
         }
     }
-
     identityType.addEventListener('change', toggleIdentityInputs);
-
     // Initial call on page load to show correct input if old value is present
     toggleIdentityInputs();
 });
@@ -644,7 +642,6 @@ document.addEventListener('DOMContentLoaded', function () {
         document.addEventListener("DOMContentLoaded", function () {
             // Get the current date in YYYY-MM-DD format
             let today = new Date().toISOString().split("T")[0];
-
             // Apply max date to all date inputs
             document.querySelectorAll(".date-picker").forEach(function (input) {
                 input.setAttribute("max", today); // Set max attribute to prevent future dates
@@ -688,6 +685,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     </script>
 
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
 const applicantTradeType = "{{ $applied_applicant->trade_type }}";
@@ -696,14 +694,59 @@ const preselectedSubBranchIds = @json($applied_applicant->sub_branch_ids ?? []);
 const preselectedSubSubBranchIds = @json($applied_applicant->sub_sub_branch_ids ?? []);
 
 $(document).ready(function () {
+  const $branch = $('#branch');
+    const $subBranch = $('#sub_branch');
+    const $subSubBranch = $('#sub_sub_branch');
+
     function toggleSubFields(show) {
         $('#subBranchWrapper').toggleClass('d-none', !show);
         $('#subSubBranchWrapper').toggleClass('d-none', !show);
     }
 
+    // Show/hide subfields on load
     if (applicantTradeType === 'NON-TRADESMEN') {
         toggleSubFields(false);
     }
+
+    // Trigger on form submit to alert if missing
+    $('form').on('submit', function (e) {
+        const branchId = parseInt($branch.val());
+        const requiresSubBranch = !hideSubFieldBranchIds.includes(branchId);
+        const selectedSubBranches = $subBranch.val() ?? [];
+        const selectedSubSubBranches = $subSubBranch.val() ?? [];
+
+        if (requiresSubBranch && selectedSubBranches.length === 0) {
+            e.preventDefault();
+            Swal.fire({
+                icon: 'warning',
+                title: 'Sub Branch Required',
+                text: 'Please select at least one Sub Branch.',
+            });
+            $subBranch.focus();
+            return false;
+        }
+
+        if (requiresSubBranch && selectedSubBranches.length > 0 && selectedSubSubBranches.length === 0) {
+            e.preventDefault();
+            Swal.fire({
+                icon: 'warning',
+                title: 'Certification Required',
+                text: 'Please select at least one Certification.',
+            });
+            $subSubBranch.focus();
+            return false;
+        }
+    });
+
+
+    // function toggleSubFields(show) {
+    //     $('#subBranchWrapper').toggleClass('d-none', !show);
+    //     $('#subSubBranchWrapper').toggleClass('d-none', !show);
+    // }
+
+    // if (applicantTradeType === 'NON-TRADESMEN') {
+    //     toggleSubFields(false);
+    // }
 
     $('#branch').on('change', function () {
         const branchId = parseInt($(this).val());

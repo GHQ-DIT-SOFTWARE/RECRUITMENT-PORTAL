@@ -23,7 +23,7 @@
 
         <style>
              .body {
-            background-image: url('{{ asset('background_logo.jpg') }}');
+            background-image: url('{{ asset('back_logo.png') }}');
             background-repeat: no-repeat;
             background-size: cover;
         }

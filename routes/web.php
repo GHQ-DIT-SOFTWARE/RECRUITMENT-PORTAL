@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
-| Web Routes
+| Web RoutesSheet
 |--------------------------------------------------------------------------
 |
 | Here is where you can register web routes for your application. These
@@ -52,7 +52,7 @@ Route::middleware(['portal'])->group(function () {
         Route::get('/get-districts/{region_id}', [BiodataController::class, 'getDistricts'])->name('get-districts');
         Route::get('/get-sub-branches/{branch_id}', [BiodataController::class, 'getSubBranches']);
         Route::get('/get-sub-sub-branches/{sub_branch_id}', [BiodataController::class, 'getSubSubBranches']);
-       
+
     });
 
     Route::prefix('education')->group(function () {

@@ -172,7 +172,7 @@
             </tr>
         </table>
 
-        <table class="no-break">
+ <table class="no-break">
             @if (!is_null($applied_applicant->disqualification_reason))
                 <tr>
                     <td colspan="8">
@@ -180,6 +180,15 @@
                     </td>
                 </tr>
             @endif
+        </table>
+
+        <table class="no-break">
+                <tr>
+                    <td colspan="8">
+                         {{ $applied_applicant->surname }} {{ $applied_applicant->first_name }} {{ $applied_applicant->other_names }}</b>declare that all the information given on this form are correct to the best of my knowledge and understand that <span class="text-danger">any false statement or omission may be liable for prosecution.</span>
+
+                    </td>
+                </tr>
         </table>
     </div>
 </body>

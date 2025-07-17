@@ -438,7 +438,7 @@ EDUCATION
                                                                 <div class="col-sm-3">
                                                                   <select class="form-control required" id="secondary_course_offered" name="secondary_course_offered">
     <option value="">Choose Course</option>
-    @foreach(['GENERAL ARTS', 'SCIENCE', 'HOME ECONOMICS','AGRICULTURAL SCIENCE'] as $course)
+    @foreach(['GENERAL ARTS', 'SCIENCE', 'HOME ECONOMICS','AGRICULTURAL SCIENCE', 'VISUAL ARTS','BUSINESS'] as $course)
         <option value="{{ $course }}" {{ old('secondary_course_offered', $applied_applicant->secondary_course_offered) == $course ? 'selected' : '' }}>
             {{ $course }}
         </option>

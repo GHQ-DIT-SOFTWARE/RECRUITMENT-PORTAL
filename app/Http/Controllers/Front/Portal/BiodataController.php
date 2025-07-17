@@ -122,13 +122,27 @@ class BiodataController extends Controller
 
         // $branches = Branch::where('arm_of_service', $applied_applicant->arm_of_service)->get();
 
-        $excludedBranchesForTradesmen = ['INFANTRY', 'ARTILLERY', 'ARMOUR', 'MILITARY POLICE'];
+        // $excludedBranchesForTradesmen = ['INFANTRY', 'ARTILLERY', 'ARMOUR', 'MILITARY POLICE'];
+
+        // if ($applied_applicant->trade_type === 'TRADESMEN') {
+        //     $branches = Branch::where('arm_of_service', $applied_applicant->arm_of_service)
+        //         ->whereNotIn('branch', $excludedBranchesForTradesmen)
+        //         ->get();
+        // } else {
+        //     $branches = Branch::where('arm_of_service', $applied_applicant->arm_of_service)->get();
+        // }
+        $nonTradesmenAllowed = ['INFANTRY', 'ARTILLERY', 'ARMOUR', 'MILITARY POLICE'];
 
         if ($applied_applicant->trade_type === 'TRADESMEN') {
             $branches = Branch::where('arm_of_service', $applied_applicant->arm_of_service)
-                ->whereNotIn('branch', $excludedBranchesForTradesmen)
+                ->whereNotIn('branch', $nonTradesmenAllowed)
+                ->get();
+        } elseif ($applied_applicant->trade_type === 'NON-TRADESMEN') {
+            $branches = Branch::where('arm_of_service', $applied_applicant->arm_of_service)
+                ->whereIn('branch', $nonTradesmenAllowed)
                 ->get();
         } else {
+            // Fallback for any other type (if needed)
             $branches = Branch::where('arm_of_service', $applied_applicant->arm_of_service)->get();
         }
 
@@ -136,6 +150,8 @@ class BiodataController extends Controller
         // $hideSubFieldsBranchIds = Branch::whereIn('branch', ['INFANTRY', 'ARTILLERY', 'ARMOUR', 'MILITARY POLICE','	EXECUTIVE TELEGRAPHIST','EXECUTIVE RADAR PLOTTERS','EXECUTIVE BOATSWAINS MATE'])
         //     ->pluck('id')
         //     ->toArray();
+
+
         $hideSubFieldsBranchIds = Branch::where('arm_of_service', $applied_applicant->arm_of_service)
             ->whereIn('branch', [
                 'INFANTRY',
@@ -185,7 +201,7 @@ class BiodataController extends Controller
             'digital_address' => 'required',
             'identity_type' => 'required',
             'national_identity_card' => 'required',
-            'sub_branch_ids' => 'required|array',
+            'sub_branch_ids' => 'nullable|array',
             'sub_sub_branch_ids' => 'nullable|array',
             'branch_id' => 'required|exists:branches,id',
             'height' => 'required',

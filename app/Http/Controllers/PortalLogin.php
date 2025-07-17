@@ -40,6 +40,7 @@ class PortalLogin extends Controller
         // Validate the request inputs
         $request->validate([
             'serial_number' => 'required|string',
+            'pincode' => 'required|string',
             'contact' => 'required|string',
         ]);
 

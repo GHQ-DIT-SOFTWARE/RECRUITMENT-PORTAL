@@ -696,6 +696,20 @@ document.getElementById('declarationForm').addEventListener('submit', function(e
         });
         return;
     }
+
+    // ✅ Show processing popup
+    Swal.fire({
+        title: 'Processing Application',
+        text: 'YOUR APPLICATION IS PROCESSING. THANK YOU!',
+        icon: 'info',
+        showConfirmButton: false,
+        allowOutsideClick: false,
+        allowEscapeKey: false,
+        didOpen: () => {
+            Swal.showLoading();
+        }
+    });
+
     // Proceed with form submission via fetch
     const form = this;
     const formData = new FormData(form);

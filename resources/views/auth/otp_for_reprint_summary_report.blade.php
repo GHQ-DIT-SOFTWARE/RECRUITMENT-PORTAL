@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="{{ config('app.name') }}" name="description" />
     <meta content="{{ config('app.name') }}" name="author" />
-   <link rel="icon" href="{{ asset('new-logo.png') }}" type="image/x-icon">
+    <link rel="icon" href="{{ asset('logo-icon.png') }}" type="image/x-icon">
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
 </head>
 <div class="auth-wrapper align-items-stretch aut-bg-img">
@@ -39,7 +39,7 @@
                 @for ($i = 1; $i <= 6; $i++)
                     <input type="text" name="otp[]" maxlength="1" pattern="[0-9]*" inputmode="numeric"
                         class="otp-box form-control @error('otp') is-invalid @enderror"
-                        style="width: 40px; height: 48px; text-align: center; font-size: 1.5rem; border: 1.5px solid #ccc; border-radius: 6px; box-shadow: none; display: inline-block;" 
+                        style="width: 40px; height: 48px; text-align: center; font-size: 1.5rem; border: 1.5px solid #ccc; border-radius: 6px; box-shadow: none; display: inline-block;"
                         required autocomplete="off" id="otp-{{ $i }}">
                 @endfor
             </div>

@@ -3,92 +3,39 @@
 <head>
     <title>Applicant Summary Sheet</title>
     <meta charset="utf-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            margin: 0;
-            padding: 0;
-            position: relative;
-            min-height: 100vh;
-            width: 100%;
-            overflow: hidden;
+        body { font-family: Arial, sans-serif; margin: 0; padding: 0; line-height: 1.5; }
+        .content { padding: 20px; }
+        table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
+        td, th { padding: 8px; text-align: left; vertical-align: top; }
+        .image-border { border: 2px solid #000; border-radius: 4px; }
+        .background-gaf {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-image: url('{{ public_path('GAF.png') }}');
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: contain;
+            opacity: 0.1;
+            z-index: -2;
         }
-
- .background-gaf {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-image: url('{{ public_path('GAF.png') }}');
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size: contain;
-        opacity: 0.1; /* faint */
-        z-index: -2;
-    }
-
-    /* Star image repeated faintly */
-    .background-stars {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-image: url('{{ public_path('star.jpg') }}');
-        background-repeat: repeat;
-        background-size: 60px; /* adjust size */
-        opacity: 0.05; /* very faint */
-        z-index: -1;
-    }
-        .content {
-            position: relative;
-            z-index: 1;
-            padding: 20px;
-            box-sizing: border-box;
-            width: 100%;
-            min-height: 100vh;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            border: none;
-            margin-bottom: 40px;
-            page-break-inside: avoid;
-        }
-
-        th,
-        td {
-            border: none;
-            padding: 8px;
-        }
-
-        th {
-            background-color: #f2f2f2;
-            text-align: left;
-        }
-        img {
-            border: none;
-            display: block;
-            page-break-inside: avoid;
-        }
-
-        .status-right {
-            text-align: right;
-            padding-right: 20px;
-        }
-
-        .image-border {
-            border: 2px solid #000;
-            border-radius: 4px;
-        }
-        /* Avoid page breaks within important elements */
-        .no-break {
-            page-break-inside: avoid;
+        .background-stars {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-image: url('{{ public_path('star.jpg') }}');
+            background-repeat: repeat;
+            background-size: 60px;
+            opacity: 0.05;
+            z-index: -1;
         }
     </style>
+
 </head>
 <body>
 <div class="background-gaf"></div>
@@ -124,212 +71,141 @@
     </table>
 <table>
     <tr>
-        <td><b>GAF NUMBER:</b></td>
-        <td>{{ $applied_applicant->applicant_serial_number }}</td>
+        <td>GAF NUMBER: {{ $applied_applicant->applicant_serial_number }}</td>
+        <td></td>
+    </tr>
 
-        <td><b>FULL NAME:</b></td>
-        <td>{{ $applied_applicant->surname }} {{ $applied_applicant->other_names }}</td>
+      <tr>
+        <td>SURNAME:  {{ $applied_applicant->surname }}</td>
+        <td>OTHER NAMES: {{ $applied_applicant->other_names }} {{ $applied_applicant->first_name }}</td>
     </tr>
     <tr>
-        <td><b>SEX:</b></td>
-        <td>{{ $applied_applicant->sex }}</td>
-
-        <td><b>DATE OF BIRTH:</b></td>
-        <td>{{ $applied_applicant->date_of_birth }}</td>
+        <td>SEX: {{ $applied_applicant->sex }}</td>
+        <td>DOB: {{ $applied_applicant->date_of_birth }}</td>
     </tr>
     <tr>
-        <td><b>HEIGHT:</b></td>
-        <td>{{ $applied_applicant->height }}</td>
-
-        <td><b>WEIGHT:</b></td>
-        <td>{{ $applied_applicant->weight }}</td>
+        <td>HEIGHT: {{ $applied_applicant->height }}</td>
+        <td>WEIGHT: {{ $applied_applicant->weight }}</td>
     </tr>
     <tr>
-        <td><b>CONTACT:</b></td>
-        <td>{{ $applied_applicant->contact }}</td>
-
-        <td><b>EMAIL:</b></td>
-        <td>{{ $applied_applicant->email }}</td>
+        <td>CONTACT: {{ $applied_applicant->contact }}</td>
+        <td>EMAIL: {{ $applied_applicant->email }}</td>
     </tr>
     <tr>
-        <td><b>MARITAL STATUS:</b></td>
-        <td>{{ $applied_applicant->marital_status }}</td>
-
-        <td><b>ARM OF SERVICE:</b></td>
-        <td>{{ $applied_applicant->arm_of_service }}</td>
+        <td>MARITAL STATUS: {{ $applied_applicant->marital_status }}</td>
+        <td>ARM OF SERVICE: {{ $applied_applicant->arm_of_service }}</td>
     </tr>
     <tr>
-        <td><b>TRADE TYPE:</b></td>
-        <td>{{ $applied_applicant->trade_type }}</td>
-
-        <td><b>BRANCH:</b></td>
-        <td>{{ optional($applied_applicant->branches)->branch }}</td>
+        <td>TRADE TYPE: {{ $applied_applicant->trade_type }}</td>
+        <td>BRANCH: {{ optional($applied_applicant->branches)->branch }}</td>
     </tr>
     <tr>
-        <td><b>REGION:</b></td>
-        <td>{{ $applied_applicant->region }}</td>
-
-        <td><b>DISTRICT:</b></td>
-        <td>{{ $applied_applicant->district }}</td>
+        <td>REGION: {{ optional($applied_applicant->regions)->region_name }}</td>
+        <td>DISTRICT: {{ optional($applied_applicant->districts)->district_name }}</td>
     </tr>
     <tr>
-        <td><b>PLACE OF BIRTH:</b></td>
-        <td>{{ $applied_applicant->place_of_birth }}</td>
-
-        <td><b>HOMETOWN:</b></td>
-        <td>{{ $applied_applicant->hometown }}</td>
+        <td>HOMETOWN: {{ $applied_applicant->home_town }}</td>
+        <td>RESIDENTIAL ADDRESS: {{ $applied_applicant->residential_address }}</td>
     </tr>
     <tr>
-        <td><b>EMPLOYMENT:</b></td>
-        <td>{{ $applied_applicant->employment }}</td>
-
-        <td><b>RESIDENTIAL ADDRESS:</b></td>
-        <td>{{ $applied_applicant->residential_address }}</td>
+        <td>DIGITAL ADDRESS: {{ $applied_applicant->digital_address }}</td>
+        <td>NATIONAL ID: {{ $applied_applicant->national_identity_card }}</td>
     </tr>
     <tr>
-        <td><b>DIGITAL ADDRESS:</b></td>
-        <td>{{ $applied_applicant->digital_address }}</td>
+        <td>IDENTITY TYPE: {{ $applied_applicant->identity_type }}</td>
+        <td>AGE: {{ $applied_applicant->age }}</td>
+    </tr>
+</table>
 
-        <td><b>NATIONAL ID:</b></td>
-        <td>{{ $applied_applicant->national_identity_card }}</td>
+<table>
+    <tr>
+        <td>SECONDARY SCHOOL: {{ $applied_applicant->name_of_secondary_school }}</td>
+        <td>COURSE OFFERED: {{ $applied_applicant->secondary_course_offered }}</td>
     </tr>
     <tr>
-        <td><b>AGE:</b></td>
-        <td>{{ $applied_applicant->age }}</td>
-        <td><b>IDENTITY TYPE:</b></td>
-        <td>{{ $applied_applicant->identity_type }}</td>
+        <td>WASSCE INDEX NO: {{ $applied_applicant->wassce_index_number }}</td>
+        <td>YEAR OF COMPLETION: {{ $applied_applicant->wassce_year_completion }}</td>
+    </tr>
+    <tr>
+        <td>WASSCE SERIAL NO: {{ $applied_applicant->wassce_serial_number }}</td>
+        <td>ENGLISH: {{ $applied_applicant->wassce_english }} - {{ $applied_applicant->wassce_subject_english_grade }}</td>
+    </tr>
+    <tr>
+        <td>MATHEMATICS: {{ $applied_applicant->wassce_mathematics }} - {{ $applied_applicant->wassce_subject_maths_grade }}</td>
+        <td>SUBJECT 3: {{ $applied_applicant->wassce_subject_three }} - {{ $applied_applicant->wassce_subject_three_grade }}</td>
+    </tr>
+    <tr>
+        <td>SUBJECT 4: {{ $applied_applicant->wassce_subject_four }} - {{ $applied_applicant->wassce_subject_four_grade }}</td>
+        <td>SUBJECT 5: {{ $applied_applicant->wassce_subject_five }} - {{ $applied_applicant->wassce_subject_five_grade }}</td>
+    </tr>
+    <tr>
+        <td>SUBJECT 6: {{ $applied_applicant->wassce_subject_six }} - {{ $applied_applicant->wassce_subject_six_grade }}</td>
+    </tr>
+
+    {{-- BECE Section --}}
+    <tr>
+        <td>BECE INDEX NO: {{ $applied_applicant->bece_index_number }}</td>
+        <td>YEAR OF COMPLETION: {{ $applied_applicant->bece_year_completion }}</td>
+    </tr>
+    <tr>
+        <td>ENGLISH: {{ $applied_applicant->bece_english }} - {{ $applied_applicant->bece_subject_english_grade }}</td>
+        <td>MATHEMATICS: {{ $applied_applicant->bece_mathematics }} - {{ $applied_applicant->bece_subject_maths_grade }}</td>
+    </tr>
+    <tr>
+        <td>SUBJECT 3: {{ $applied_applicant->bece_subject_three }} - {{ $applied_applicant->bece_subject_three_grade }}</td>
+        <td>SUBJECT 4: {{ $applied_applicant->bece_subject_four }} - {{ $applied_applicant->bece_subject_four_grade }}</td>
+    </tr>
+    <tr>
+        <td>SUBJECT 5: {{ $applied_applicant->bece_subject_five }} - {{ $applied_applicant->bece_subject_five_grade }}</td>
+        <td>SUBJECT 6: {{ $applied_applicant->bece_subject_six }} - {{ $applied_applicant->bece_subject_six_grade }}</td>
+    </tr>
+
+    {{-- Language & Sports --}}
+    <tr>
+        <td>LANGUAGES: {{ implode(', ', $applied_applicant->language ?? []) }}</td>
+        <td>SPORTS INTEREST: {{ implode(', ', $applied_applicant->sports_interest ?? []) }}</td>
+    </tr>
+
+    {{-- Exam Types --}}
+    <tr>
+        <td>EXAM TYPE 1: {{ $applied_applicant->exam_type_one }}</td>
+        <td>EXAM TYPE 2: {{ $applied_applicant->exam_type_two }}</td>
+    </tr>
+    <tr>
+        <td>EXAM TYPE 3: {{ $applied_applicant->exam_type_three }}</td>
+        <td>EXAM TYPE 4: {{ $applied_applicant->exam_type_four }}</td>
+    </tr>
+    <tr>
+        <td>EXAM TYPE 5: {{ $applied_applicant->exam_type_five }}</td>
+        <td>EXAM TYPE 6: {{ $applied_applicant->exam_type_six }}</td>
+    </tr>
+
+    {{-- Result Slips --}}
+    <tr>
+        <td>RESULT SLIP 1: {{ $applied_applicant->results_slip_one }}</td>
+        <td>RESULT SLIP 2: {{ $applied_applicant->results_slip_two }}</td>
+    </tr>
+    <tr>
+        <td>RESULT SLIP 3: {{ $applied_applicant->results_slip_three }}</td>
+        <td>RESULT SLIP 4: {{ $applied_applicant->results_slip_four }}</td>
+    </tr>
+    <tr>
+        <td>RESULT SLIP 5: {{ $applied_applicant->results_slip_five }}</td>
+        <td>RESULT SLIP 6: {{ $applied_applicant->results_slip_six }}</td>
+    </tr>
+
+    {{-- National ID / Age --}}
+    <tr>
+        <td>NATIONAL ID: {{ $applied_applicant->national_identity_card }}</td>
+        <td>IDENTITY TYPE: {{ $applied_applicant->identity_type }}</td>
     </tr>
 
 </table>
 
 <table>
     <tr>
-        <td><b>SECONDARY SCHOOL:</b></td>
-        <td>{{ $applied_applicant->name_of_secondary_school }}</td>
-
-        <td><b>COURSE OFFERED:</b></td>
-        <td>{{ $applied_applicant->secondary_course_offered }}</td>
+        <td> <b>{{ $applied_applicant->surname }} {{ $applied_applicant->first_name }} {{ $applied_applicant->other_names }}</b>declare that all the information given on this form are correct to the best of my knowledge and understand that <span class="text-danger">any false statement or omission may be liable for prosecution.</span></td>
     </tr>
-    <tr>
-        <td><b>WASSCE INDEX NO:</b></td>
-        <td>{{ $applied_applicant->wassce_index_number }}</td>
-
-        <td><b>YEAR OF COMPLETION:</b></td>
-        <td>{{ $applied_applicant->wassce_year_completion }}</td>
-    </tr>
-    <tr>
-        <td><b>WASSCE SERIAL NO:</b></td>
-        <td>{{ $applied_applicant->wassce_serial_number }}</td>
-
-        <td><b>ENGLISH:</b></td>
-        <td>{{ $applied_applicant->wassce_english }} - {{ $applied_applicant->wassce_subject_english_grade }}</td>
-    </tr>
-    <tr>
-        <td><b>MATHEMATICS:</b></td>
-        <td>{{ $applied_applicant->wassce_mathematics }} - {{ $applied_applicant->wassce_subject_maths_grade }}</td>
-
-        <td><b>SUBJECT 3:</b></td>
-        <td>{{ $applied_applicant->wassce_subject_three }} - {{ $applied_applicant->wassce_subject_three_grade }}</td>
-    </tr>
-    <tr>
-        <td><b>SUBJECT 4:</b></td>
-        <td>{{ $applied_applicant->wassce_subject_four }} - {{ $applied_applicant->wassce_subject_four_grade }}</td>
-
-        <td><b>SUBJECT 5:</b></td>
-        <td>{{ $applied_applicant->wassce_subject_five }} - {{ $applied_applicant->wassce_subject_five_grade }}</td>
-    </tr>
-    <tr>
-        <td><b>SUBJECT 6:</b></td>
-        <td>{{ $applied_applicant->wassce_subject_six }} - {{ $applied_applicant->wassce_subject_six_grade }}</td>
-
-    </tr>
-
-    {{-- BECE Section --}}
-    <tr>
-        <td><b>BECE INDEX NO:</b></td>
-        <td>{{ $applied_applicant->bece_index_number }}</td>
-
-        <td><b>YEAR OF COMPLETION:</b></td>
-        <td>{{ $applied_applicant->bece_year_completion }}</td>
-    </tr>
-    <tr>
-        <td><b>ENGLISH:</b></td>
-        <td>{{ $applied_applicant->bece_english }} - {{ $applied_applicant->bece_subject_english_grade }}</td>
-
-        <td><b>MATHEMATICS:</b></td>
-        <td>{{ $applied_applicant->bece_mathematics }} - {{ $applied_applicant->bece_subject_maths_grade }}</td>
-    </tr>
-    <tr>
-        <td><b>SUBJECT 3:</b></td>
-        <td>{{ $applied_applicant->bece_subject_three }} - {{ $applied_applicant->bece_subject_three_grade }}</td>
-
-        <td><b>SUBJECT 4:</b></td>
-        <td>{{ $applied_applicant->bece_subject_four }} - {{ $applied_applicant->bece_subject_four_grade }}</td>
-    </tr>
-    <tr>
-        <td><b>SUBJECT 5:</b></td>
-        <td>{{ $applied_applicant->bece_subject_five }} - {{ $applied_applicant->bece_subject_five_grade }}</td>
-
-        <td><b>SUBJECT 6:</b></td>
-        <td>{{ $applied_applicant->bece_subject_six }} - {{ $applied_applicant->bece_subject_six_grade }}</td>
-    </tr>
-
-
-    {{-- Language & Sports --}}
-    <tr>
-        <td><b>LANGUAGES:</b></td>
-        <td>{{ implode(', ', $applied_applicant->language ?? []) }}</td>
-
-        <td><b>SPORTS INTEREST:</b></td>
-        <td>{{ implode(', ', $applied_applicant->sports_interest ?? []) }}</td>
-    </tr>
-
-    {{-- Professional / Exam Types --}}
-    <tr>
-        <td><b>EXAM TYPE 1:</b></td>
-        <td>{{ $applied_applicant->exam_type_one }}</td>
-
-        <td><b>EXAM TYPE 2:</b></td>
-        <td>{{ $applied_applicant->exam_type_two }}</td>
-    </tr>
-    <tr>
-        <td><b>EXAM TYPE 3:</b></td>
-        <td>{{ $applied_applicant->exam_type_three }}</td>
-
-        <td><b>EXAM TYPE 4:</b></td>
-        <td>{{ $applied_applicant->exam_type_four }}</td>
-    </tr>
-    <tr>
-        <td><b>EXAM TYPE 5:</b></td>
-        <td>{{ $applied_applicant->exam_type_five }}</td>
-
-        <td><b>EXAM TYPE 6:</b></td>
-        <td>{{ $applied_applicant->exam_type_six }}</td>
-    </tr>
-
-    {{-- Result Slips --}}
-    <tr>
-        <td><b>RESULT SLIP 1:</b></td>
-        <td>{{ $applied_applicant->results_slip_one}}</td>
-
-        <td><b>RESULT SLIP 2:</b></td>
-        <td>{{ $applied_applicant->results_slip_two}}</td>
-    </tr>
-    <tr>
-        <td><b>RESULT SLIP 3:</b></td>
-        <td>{{ $applied_applicant->results_slip_three}}</td>
-
-        <td><b>RESULT SLIP 4:</b></td>
-        <td>{{ $applied_applicant->results_slip_four}}</td>
-    </tr>
-    <tr>
-        <td><b>RESULT SLIP 5:</b></td>
-        <td>{{ $applied_applicant->results_slip_five}}</td>
-
-        <td><b>RESULT SLIP 6:</b></td>
-        <td>{{ $applied_applicant->results_slip_six}}</td>
-    </tr>
-
 </table>
 
     <table>
