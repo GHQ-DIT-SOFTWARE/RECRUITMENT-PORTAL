@@ -19,9 +19,16 @@
             <form method="post" action="{{ route('otp-for-initial-login') }}">
     @csrf
     <div style="text-align: center;">
-        <img src="{{ asset('new-logo.png') }}" alt=""
-            style=" width: 150px; height: 180px; object-fit: cover;">
+      <img src="{{ asset('auth_logo_2.png') }}" alt="Logo"
+                        class="login-logo-img"
+                        style="width: 320px;  object-fit: cover;">
     </div>
+
+          @if (session('otp'))
+    <div class="alert alert-info text-center">
+        <strong>OTP:</strong> {{ session('otp') }}
+    </div>
+@endif
     <div class="auth-content">
         @if ($errors->any())
             <div class="alert alert-danger">
@@ -39,7 +46,7 @@
                 @for ($i = 1; $i <= 6; $i++)
                     <input type="text" name="otp[]" maxlength="1" pattern="[0-9]*" inputmode="numeric"
                         class="otp-box form-control @error('otp') is-invalid @enderror"
-                        style="width: 40px; height: 48px; text-align: center; font-size: 1.5rem; border: 1.5px solid #ccc; border-radius: 6px; box-shadow: none; display: inline-block;" 
+                        style="width: 40px; height: 48px; text-align: center; font-size: 1.5rem; border: 1.5px solid #ccc; border-radius: 6px; box-shadow: none; display: inline-block;"
                         required autocomplete="off" id="otp-{{ $i }}">
                 @endfor
             </div>
