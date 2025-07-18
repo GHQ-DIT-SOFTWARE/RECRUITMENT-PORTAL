@@ -492,42 +492,11 @@ EDUCATION
     @endif
 </div>
 
-    {{-- <div id="existing-files" class="mt-2">
-        @foreach(json_decode($applied_applicant->wassce_certificate) as $file)
-    <a href="{{ asset($file) }}" target="_blank">{{ basename($file) }}</a><br/> <br>
-     @endforeach
-    </div> --}}
 
     @error('wassce_certificate.*')
         <span class="text-danger">{{ $message }}</span>
     @enderror
 </div>
-
-                                                                {{-- <label for="b-t-name"
-                                                                    class="col-sm-3 col-form-label">Upload
-                                                                    SHS Certificate</label>
-                                                                <div class="col-sm-3">
-                                                                    <div
-                                                                        class="file btn waves-effect waves-light btn-outline-primary mt-3 file-btn">
-                                                                        <i class="feather icon-paperclip"></i> Add
-                                                                        Attachment
-                                                                        <input type="file" name="wassce_certificate"
-                                                                            accept=".pdf" id="wassce_certificate" />
-                                                                        @error('wassce_certificate')
-                                                                            <span
-                                                                                class="text-danger">{{ $message }}</span>
-                                                                        @enderror
-                                                                    </div>
-                                                                    <div id="wassce-file-preview" class="mt-2">
-                                                                        @if (!empty($applied_applicant->wassce_certificate))
-                                                                            <p>Selected file:
-                                                                                {{ basename($applied_applicant->wassce_certificate) }}
-                                                                            </p>
-                                                                            <a href="{{ asset($applied_applicant->wassce_certificate) }}"
-                                                                                target="_blank">View PDF</a>
-                                                                        @endif
-                                                                    </div>
-                                                                </div> --}}
 
                                                             </div>
                                                         </div>
@@ -583,8 +552,8 @@ EDUCATION
                                                                     name="results_slip_one" class="form-control"
                                                                     value="{{ old('results_slip_one', $applied_applicant->results_slip_one) }}"
                                                                     placeholder="Results Slip Number(s) /Index Number" required>
-                                                                {{-- <input type="checkbox" id="check_same" name="check_same"
-                                                                    class="ml-2"> Same as above --}}
+                                                                <input type="checkbox" id="check_same" name="check_same"
+                                                                    class="ml-2"> Same as above
                                                             </div>
                                                         </div>
 
@@ -967,9 +936,6 @@ EDUCATION
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0-beta.1/js/select2.min.js"></script>
     <script src="{{ asset('frontend/assets/js/plugins/select2.full.min.js') }}"></script>
     <script src="{{ asset('frontend/assets/js/pages/form-select-custom.js') }}"></script>
-
-
-
     <script>
     let selectedFour = "{{ old('wassce_subject_four', $applied_applicant->wassce_subject_four) }}";
     let selectedFive = "{{ old('wassce_subject_five', $applied_applicant->wassce_subject_five) }}";
